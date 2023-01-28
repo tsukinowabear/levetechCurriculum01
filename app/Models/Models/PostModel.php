@@ -10,4 +10,9 @@ class PostModel extends Model
     use HasFactory;
     
     protected $table = 'posts';
+    
+    public function getPaginateByLimit(int $limit_count = 5)
+    {
+        return $this->orderBy('updated_at', 'DESC')->Paginate($limit_count);
+    }
 }

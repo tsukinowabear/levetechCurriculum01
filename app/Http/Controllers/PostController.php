@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Models\PostModel;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -16,5 +16,15 @@ class PostController extends Controller
 	public function show(PostModel $post)
 	{
 		return view('posts/show')->with (['posts' => $post]);
+	}
+	public function create()
+	{
+		return view('posts/create');
+	}
+	public function store(PostRequest $request, PostModel $post)
+	{
+		$input = $request['post'];
+		$post->fill($input)->save();
+		return redirect('/posts/' . $post->id);
 	}
 }

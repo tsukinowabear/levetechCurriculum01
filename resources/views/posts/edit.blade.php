@@ -6,20 +6,19 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 	</head>
 	<body>
-	    <h1>BlogName</h1>
-        <form action="/posts" method="POST">
+	    <h1>編集画面</h1>
+        <form action="/posts/{{ $post->id }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="title">
                 <h2>Title<h2>
-                    <input type="text" name="post[title]" placeholder="タイトル" value="{{ $post->title }}"/>
-                    <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+                    <input type="text" name="post[title]" value="{{ $post->title }}"/>
             </div> 
             <div class="body">
                 <h2>Body</h2>
-                    <textarea name="post[body]" placeholder="本文" >{{ $post->body }}</textarea>
-                    <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                <textarea name="post[body]">{{ $post->body }}</textarea>
             </div>
-            <input type="submit" value="store"/>
+            <input type="submit" value="update"/>
         </form>
 		<div class="footer">
 			<a href="/">戻る</a>
